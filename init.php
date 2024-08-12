@@ -6,7 +6,7 @@
 	}
 	
 	class init extends \sv_core\core_plugin {
-		const version = 2002;
+		const version = 2003;
 		const version_core_match = 10000;
 		
 		public function load(){
