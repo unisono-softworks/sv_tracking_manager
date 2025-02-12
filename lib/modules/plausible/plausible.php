@@ -11,11 +11,11 @@
 	 * @license			See license.txt or https://straightvisions.com
 	 */
 	
-	class hubspot extends modules {
+	class plausible extends modules {
 		public function init() {
 			// Section Info
-			$this->set_section_title( __('Hubspot', 'sv_tracking_manager' ) )
-				 ->set_section_desc(__( sprintf('%sHubspot Login%s', '<a target="_blank" href="https://app.hubspot.com/login">','</a>'), 'sv_tracking_manager' ))
+			$this->set_section_title( __('Plausible', 'sv_tracking_manager' ) )
+				 ->set_section_desc(__( sprintf('%sPlausible Login%s', '<a target="_blank" href="https://plausible.io/login">','</a>'), 'sv_tracking_manager' ))
 				 ->set_section_type( 'settings' )
 				 ->load_settings()
 				 ->register_scripts()
@@ -26,24 +26,20 @@
 			add_action('init', array($this, 'load'));
 		}
 		
-		protected function load_settings(): hubspot {
+		protected function load_settings(): plausible {
 			$this->get_setting('activate')
 				 ->set_title( __( 'Activate', 'sv_tracking_manager' ) )
 				 ->set_description('Enable Tracking')
 				 ->load_type( 'checkbox' );
-			
-			$this->get_setting('tracking_id')
-				 ->set_title( __( 'Hubspot Tracking ID', 'sv_tracking_manager' ) )
-				 ->set_description( __( sprintf('%sHow to retrieve Tracking ID%s', '<a target="_blank" href="https://knowledge.hubspot.com/reports/install-the-hubspot-tracking-code">','</a>'), 'sv_tracking_manager' ) )
-				 ->load_type( 'text' );
 
 			return $this;
 		}
-		protected function register_scripts(): hubspot {
+		protected function register_scripts(): plausible {
 			if($this->is_active()) {
 				$this->get_script('default')
-					 ->set_path('lib/frontend/js/default.js')
-					 ->set_type('js');
+						->set_path('https://plausible.io/js/plausible.js')
+						->set_type('js')
+						->set_custom_attributes(' defer data-domain="'.parse_url(get_site_url())['host'].'"');
 			}
 			
 			return $this;
@@ -57,24 +53,12 @@
 			if($this->get_setting('activate')->get_data() !== '1'){
 				return false;
 			}
-			// Tracking ID not set
-			if(!$this->get_setting('tracking_id')->get_data()){
-				return false;
-			}
-			// Tracking ID empty
-			if(strlen(trim($this->get_setting('tracking_id')->get_data())) === 0){
-				return false;
-			}
 			
 			return true;
 		}
-		public function load(): hubspot{
+		public function load(): plausible{
 			if($this->is_active()){
-				$this->get_script('default')
-					 ->set_is_enqueued()
-					 ->set_localized(array(
-						 'tracking_id'	=> $this->get_setting('tracking_id')->get_data()
-					 ));
+				$this->get_script('default')->set_is_enqueued();
 			}
 			
 			return $this;

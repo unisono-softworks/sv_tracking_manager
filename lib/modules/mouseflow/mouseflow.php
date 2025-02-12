@@ -11,11 +11,11 @@
 	 * @license			See license.txt or https://straightvisions.com
 	 */
 	
-	class microsoft_advertising extends modules {
+	class mouseflow extends modules {
 		public function init() {
 			// Section Info
-			$this->set_section_title( __('Microsoft Advertising', 'sv_tracking_manager' ) )
-				 ->set_section_desc(__( sprintf('%sMicrosoft Advertising Login%s', '<a target="_blank" href="https://ads.microsoft.com/">','</a>'), 'sv_tracking_manager' ))
+			$this->set_section_title( __('Mouseflow', 'sv_tracking_manager' ) )
+				 ->set_section_desc(__( sprintf('%sMouseflow Login%s', '<a target="_blank" href="https://app.mouseflow.com/sign-in">','</a>'), 'sv_tracking_manager' ))
 				 ->set_section_type( 'settings' )
 				 ->load_settings()
 				 ->register_scripts()
@@ -26,7 +26,7 @@
 			add_action('init', array($this, 'load'));
 		}
 		
-		protected function load_settings(): microsoft_advertising {
+		protected function load_settings(): mouseflow {
 			$this->get_setting('activate')
 				 ->set_title( __( 'Activate', 'sv_tracking_manager' ) )
 				 ->set_description('Enable Tracking')
@@ -34,11 +34,11 @@
 			
 			$this->get_setting('tracking_id')
 				 ->set_title( __( 'Tracking ID', 'sv_tracking_manager' ) )
-				 ->set_description( __( sprintf('%sHow to retrieve Tracking ID%s', '<a target="_blank" href="https://help.ads.microsoft.com/#apex/ads/en/56686/2">','</a>'), 'sv_tracking_manager' ) )
+				 ->set_description( __( sprintf('%sHow to retrieve Tracking ID%s', '<a target="_blank" href="https://support.mouseflow.com/support/solutions/articles/44001578383-how-do-i-find-my-mouseflow-site-id-">','</a>'), 'sv_tracking_manager' ) )
 				 ->load_type( 'text' );
 			return $this;
 		}
-		protected function register_scripts(): microsoft_advertising {
+		protected function register_scripts(): mouseflow {
 			if($this->is_active()) {
 				$this->get_script('default')
 					 ->set_path('lib/frontend/js/default.js')
@@ -67,7 +67,7 @@
 			
 			return true;
 		}
-		public function load(): microsoft_advertising{
+		public function load(): mouseflow{
 			if($this->is_active()){
 				$this->get_script('default')
 					 ->set_is_enqueued()
