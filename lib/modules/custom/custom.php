@@ -29,7 +29,7 @@ class custom extends modules {
 
 		return true;
 	}
-	protected function load_settings(): custom {
+	public function load_settings(): custom {
 		// Events Groups
 		$this->get_setting('custom_scripts')
 			->set_title(__('Custom Scripts', 'sv_tracking_manager'))
