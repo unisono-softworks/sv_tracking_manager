@@ -81,7 +81,7 @@ class usercentrics extends modules {
 		add_action('init', array($this, 'register_scripts'));
 	}
 
-	protected function load_settings(): usercentrics {
+	public function load_settings(): usercentrics {
 		$this->get_setting('activate')
 			->set_title( __( 'Activate', 'sv_tracking_manager' ) )
 			->set_description(__('Enable Usercentrics support','sv_tracking_manager'))
